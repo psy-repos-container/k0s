@@ -22,7 +22,7 @@
       
       
       <link rel="icon" href="../img/k0s_social.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.3">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.4">
     
     
       
@@ -2326,6 +2326,7 @@ k0sctl</a> and the <a href="https://github.com/k0sproject/k0sctl/blob/main/READM
 <span class="w">      </span><span class="nt">mtu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
 <span class="w">      </span><span class="nt">peerRouterASNs</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
 <span class="w">      </span><span class="nt">peerRouterIPs</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="w">      </span><span class="nt">extraArgs</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">nodeLocalLoadBalancing</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">      </span><span class="nt">envoyProxy</span><span class="p">:</span>
@@ -2544,11 +2545,11 @@ CALICO_IPV6POOL_CIDR:<span class="w"> </span><span class="s2">&quot;{{ spec.netw
 </tr>
 <tr>
 <td><code>peerRouterIPs</code></td>
-<td>Comma-separated list of <a href="https://github.com/cloudnativelabs/kube-router/blob/master/docs/bgp.md#global-external-bgp-peers">global peer addresses</a>.</td>
+<td>DEPRECATED: Use extraArgs with peerRouterIPs instead. Comma-separated list of <a href="https://github.com/cloudnativelabs/kube-router/blob/master/docs/bgp.md#global-external-bgp-peers">global peer addresses</a>.</td>
 </tr>
 <tr>
 <td><code>peerRouterASNs</code></td>
-<td>Comma-separated list of <a href="https://github.com/cloudnativelabs/kube-router/blob/master/docs/bgp.md#global-external-bgp-peers">global peer ASNs</a>.</td>
+<td>DEPRECATED: Use extraArgs with peerRouterASNs instead. Comma-separated list of <a href="https://github.com/cloudnativelabs/kube-router/blob/master/docs/bgp.md#global-external-bgp-peers">global peer ASNs</a>.</td>
 </tr>
 <tr>
 <td><code>hairpin</code></td>
@@ -2561,6 +2562,10 @@ CALICO_IPV6POOL_CIDR:<span class="w"> </span><span class="s2">&quot;{{ spec.netw
 <tr>
 <td><code>ipMasq</code></td>
 <td>IP masquerade for traffic originating from the pod network, and destined outside of it (default: false)</td>
+</tr>
+<tr>
+<td><code>extraArgs</code></td>
+<td>Extra arguments to pass to kube-router. Can be also used to override any k0s managed args. For reference, see kube-router <a href="https://github.com/cloudnativelabs/kube-router/blob/master/docs/user-guide.md#command-line-options">documentation</a>. (default: empty)</td>
 </tr>
 </tbody>
 </table>
@@ -2973,10 +2978,10 @@ api-server, without that k0s serves no purpose.</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["toc.autohide", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "stable", "provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["toc.autohide", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.c011b7c0.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "stable", "provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      <script src="../assets/javascripts/bundle.7389ff0e.min.js"></script>
       
     
   </body>
