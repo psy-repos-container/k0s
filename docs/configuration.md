@@ -35,7 +35,7 @@ options should be placed in the `spec.k0s.config` section of the k0sctl's
 configuration file. See the section on how to install [k0s via
 k0sctl][k0sctl-install] and the [k0sctl README] for more information.
 
-[k0sctl-install]: ../k0sctl-install
+[k0sctl-install]: k0sctl-install.md
 [k0sctl README]: https://github.com/k0sproject/k0sctl/blob/main/README.md
 
 ## Configuration file reference
@@ -137,12 +137,25 @@ spec:
 
 ### `spec.storage`
 
-| Element            | Description                                                                                                                                                            |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`             | Type of the data store (valid values:`etcd` or `kine`). **Note**: Type `etcd` will cause k0s to create and manage an elastic etcd cluster within the controller nodes. |
-| `etcd.peerAddress` | Node address used for etcd cluster peering.                                                                                                                            |
-| `etcd.extraArgs`   | Map of key-values (strings) for any extra arguments to pass down to etcd process.                                                                                      |
-| `kine.dataSource`  | [kine](https://github.com/k3s-io/kine) datasource URL.                                                                                                                 |
+| Element                | Description                                                                                                                                                            |
+|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `type`                 | Type of the data store (valid values:`etcd` or `kine`). **Note**: Type `etcd` will cause k0s to create and manage an elastic etcd cluster within the controller nodes. |
+| `etcd.peerAddress`     | Node address used for etcd cluster peering.                                                                                                                            |
+| `etcd.extraArgs`       | Map of key-values (strings) for any extra arguments to pass down to etcd process.                                                                                      |
+| `kine.dataSource`      | [kine](https://github.com/k3s-io/kine) datasource URL.                                                                                                                 |
+| `etcd.externalCluster` | Configuration when etcd is externally managed, i.e. running on dedicated nodes. See [`spec.storage.etcd.externalCluster`](#specstorageetcdexternalcluster)             |
+
+#### `spec.storage.etcd.externalCluster`
+
+k0s can also work with externally managed Etcd cluster. If this is configured, k0s will NOT set up etcd, it has to be managed manually.
+
+| Element          | Description                                                                                                                                               |
+|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `endpoints`      | Array of Etcd endpoints to use.                                                                                                                           |
+| `etcdPrefix`     | Prefix to use for this cluster. The same external Etcd cluster can be used for several k0s clusters, each prefixed with unique prefix to store data with. |
+| `caFile`         | CaFile is the host path to a file with Etcd cluster CA certificate.                                                                                       |
+| `clientCertFile` | ClientCertFile is the host path to a file with TLS certificate for etcd client.                                                                           |
+| `clientKeyFile`  | ClientKeyFile is the host path to a file with TLS key for etcd client.                                                                                    |
 
 ### `spec.network`
 
@@ -274,7 +287,7 @@ changes.
 | `type`           | The type of the node-local load balancer to deploy on worker nodes. Default: `EnvoyProxy`. (This is the only option for now.) |
 | `envoyProxy`     | Configuration options related to the "EnvoyProxy" type of load balancing.                                                     |
 
-[node-local load balancing]: ../nllb
+[node-local load balancing]: nllb.md
 
 ##### `spec.network.nodeLocalLoadBalancing.envoyProxy`
 
@@ -511,8 +524,8 @@ users to build a minimal Kubernetes control plane and use what ever components
 they need to fulfill their need for the control plane. Disabling the system
 components happens through a command line flag for the controller process:
 
-```sh
---disable-components strings                     disable components (valid items: api-config,autopilot,control-api,coredns,csr-approver,endpoint-reconciler,helm,konnectivity-server,kube-controller-manager,kube-proxy,kube-scheduler,metrics-server,network-provider,node-role,system-rbac,worker-config)
+```text
+--disable-components strings                     disable components (valid items: autopilot,control-api,coredns,csr-approver,endpoint-reconciler,helm,konnectivity-server,kube-controller-manager,kube-proxy,kube-scheduler,metrics-server,network-provider,node-role,system-rbac,worker-config)
 ```
 
 **Note:** As of k0s 1.26, the kubelet-config component has been replaced by the
