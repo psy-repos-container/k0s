@@ -26,7 +26,7 @@ require (
 	github.com/go-playground/validator/v10 v10.27.0
 	github.com/google/go-cmp v0.7.0
 	github.com/hashicorp/terraform-exec v0.23.0
-	github.com/k0sproject/bootloose v0.9.1
+	github.com/k0sproject/bootloose v0.9.2
 	github.com/k0sproject/dig v0.4.0
 	github.com/k0sproject/version v0.7.0
 	github.com/kardianos/service v1.2.4
